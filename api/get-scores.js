@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-  // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -10,12 +9,16 @@ export default async function handler(req, res) {
 
   try {
     const r = await fetch(
-      `${SUPABASE_URL}/rest/v1/highscores?select=*&order=score.desc&limit=10`,
+      `${SUPABASE_URL}/rest/v1/highscores?select=player_name,score&order=score.desc&limit=10`,
       { headers: { apikey: SUPABASE_KEY } }
     );
-    const json = await r.json();
-    return res.status(200).json(json);
-  } catch (e) {
+    const rows = await r.json();
+    const lines = rows
+      .map((row, i) => `${i + 1}. ${row.player_name} — ${row.score}`)
+      .join('\n');
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    return res.status(200).send(lines || 'No scores yet');
+  } catch {
     return res.status(500).json({ error: 'Fetch failed' });
   }
 }
