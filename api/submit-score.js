@@ -6,15 +6,19 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  // --- Normalise body (handles Construct Dictionary + plain JSON) ---
+  // Accept plain JSON or Construct Dictionary { c2dictionary:true, data:{...} }
   let body = req.body;
-  try {
-    if (typeof body === 'string') body = JSON.parse(body);
-  } catch (_) {}
+  if (typeof body === 'string') {
+    try { body = JSON.parse(body); } catch (_) {}
+  }
   if (body && body.c2dictionary && body.data) body = body.data;
 
-  let name = ((body?.name ?? '') + '').trim();
-  let score = Number(body?.score);
+  let name = ((body?.name ?? '') + '')
+    .trim()
+    .toLowerCase()     // one score per case-insensitive name
+    .slice(0, 24);
+
+  const score = Number(body?.score);
 
   if (!name || !Number.isFinite(score)) {
     return res.status(400).json({ error: 'Invalid data', detail: { name, score } });
@@ -24,12 +28,12 @@ export default async function handler(req, res) {
   const SUPABASE_KEY = process.env.SUPABASE_ANON_KEY;
 
   try {
-    const r = await fetch(`${SUPABASE_URL}/rest/v1/highscores`, {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/highscores?on_conflict=player_name`, {
       method: 'POST',
       headers: {
         apikey: SUPABASE_KEY,
         'Content-Type': 'application/json',
-        Prefer: 'return=representation',
+        Prefer: 'resolution=merge-duplicates,return=representation',
       },
       body: JSON.stringify({
         player_name: name,
