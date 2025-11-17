@@ -1357,7 +1357,7 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => Math.round(f0(0, 1));
+			return () => f0(0, 0, 0, 1, 1);
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();

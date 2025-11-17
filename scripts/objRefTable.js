@@ -34,6 +34,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Touch.Cnds.OnTouchStart,
 		C3.Plugins.System.Cnds.Every,
 		C3.Plugins.System.Exps.random,
+		C3.Plugins.System.Exps.choose,
 		C3.Plugins.Sprite.Acts.Spawn,
 		C3.Plugins.System.Cnds.Else,
 		C3.Plugins.System.Acts.CreateObject,
@@ -85,7 +86,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Audio.Acts.SetSilent,
 		C3.Plugins.System.Acts.SetBoolVar,
 		C3.Plugins.System.Acts.GoToLayout,
-		C3.Plugins.System.Exps.choose,
 		C3.Plugins.Touch.Cnds.IsTouchingObject
 	];
 };
