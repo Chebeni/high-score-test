@@ -1353,7 +1353,7 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const v1 = p._GetNode(1).GetVar();
 			const v2 = p._GetNode(2).GetVar();
-			return () => f0(C3.clamp((2.4 - (0.01 * v1.GetValue())), 0.25, 2.2), C3.clamp((3.6 - (0.01 * v2.GetValue())), 0.4, 3.2));
+			return () => f0(C3.clamp((1.5 - (0.02 * v1.GetValue())), 0.15, 1.8), C3.clamp((2.4 - (0.02 * v2.GetValue())), 0.25, 2.2));
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -1385,10 +1385,11 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(1.5, 3.5);
 		},
+		() => 20,
 		() => 0.25,
-		() => 75,
+		() => 35,
 		() => 0.15,
-		() => 80,
+		() => 50,
 		() => "Collisions",
 		() => -15,
 		() => "bgmusic",
