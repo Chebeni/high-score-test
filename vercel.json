@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/shop",
+      "destination": "https://akibastudios.com/products/ever-dog-has-its-day-ornament",
+      "permanent": true
+    }
+  ]
+}
