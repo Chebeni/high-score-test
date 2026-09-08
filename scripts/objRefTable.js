@@ -172,6 +172,7 @@ self.C3_JsPropNameTable = [
 	{NameDisplayText: 0},
 	{SpriteShop: 0},
 	{Browser: 0},
+	{shopIcon: 0},
 	{ObstacleFamily: 0},
 	{Hero: 0},
 	{Family1: 0},
@@ -258,6 +259,7 @@ self.InstanceType = {
 	NameDisplayText: class extends self.ITextInstance {},
 	SpriteShop: class extends self.ISpriteInstance {},
 	Browser: class extends self.IInstance {},
+	shopIcon: class extends self.ISpriteInstance {},
 	ObstacleFamily: class extends self.ISpriteInstance {},
 	Hero: class extends self.ISpriteInstance {},
 	Family1: class extends self.I9PatchInstance {}
