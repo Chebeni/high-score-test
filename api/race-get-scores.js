@@ -9,12 +9,12 @@ export default async function handler(req, res) {
 
   try {
     const r = await fetch(
-      `${SUPABASE_URL}/rest/v1/highscores?select=player_name,score&order=score.desc&limit=10`,
+      `${SUPABASE_URL}/rest/v1/race_highscores?select=player_name,score&order=score.asc&limit=10`,
       { headers: { apikey: SUPABASE_KEY } }
     );
     const rows = await r.json();
     const lines = rows
-      .map((row, i) => `${i + 1}. ${row.player_name} — ${row.score}`)
+      .map((row, i) => `${i + 1}. ${row.player_name} - ${(row.score / 1000).toFixed(3)}s`)
       .join('\n');
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
     return res.status(200).send(lines || 'No scores yet');
