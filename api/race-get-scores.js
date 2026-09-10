@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     );
     const rows = await r.json();
     const lines = rows
-      .map((row, i) => `${i + 1}. ${row.player_name} - ${(row.score / 1000).toFixed(3)}s`)
+      .map((row, i) => `${i + 1}. ${row.player_name} - ${(row.score / 1000).toFixed(2)}s`)
       .join('\n');
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
     return res.status(200).send(lines || 'No scores yet');
