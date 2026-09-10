@@ -28,12 +28,12 @@ export default async function handler(req, res) {
   const SUPABASE_KEY = process.env.SUPABASE_ANON_KEY;
 
   try {
-    const r = await fetch(`${SUPABASE_URL}/rest/v1/race_highscores?on_conflict=player_name`, {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/race_highscores`, {
       method: 'POST',
       headers: {
         apikey: SUPABASE_KEY,
         'Content-Type': 'application/json',
-        Prefer: 'resolution=merge-duplicates,return=representation',
+        Prefer: 'return=representation',
       },
       body: JSON.stringify({
         player_name: name,
