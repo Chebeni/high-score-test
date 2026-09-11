@@ -29,7 +29,7 @@ export default async function handler(req, res) {
   const name = ((body?.name ?? '') + '')
     .trim()
     .toLowerCase()
-    .slice(0, 24);
+    .slice(0, 14);
 
   // Race time in milliseconds
   const score = Math.trunc(Number(body?.score));
